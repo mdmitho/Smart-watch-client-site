@@ -66,7 +66,7 @@ const Header = () => {
               </ul>
             </div>
             <div className="">
-              <img className="h-10 w-10" src={logo} alt="" />
+              <img className="h-10 w-10 " src={logo} alt="" />
             </div>
             <NavLink to="/" className="btn btn-ghost normal-case font-bold  text-xl">
               Smart Watch
