@@ -6,6 +6,7 @@ import Footer from './components/Pages/Footer/Footer';
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/Pages/Login/Login';
 import { Toaster } from 'react-hot-toast';
+import SignUp from './components/Pages/SignUp/SignUp';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Header></Header>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/signUp" element={<SignUp />}></Route>
         <Route path="login" element={<Login />} />
       </Routes>
       <Footer></Footer>
