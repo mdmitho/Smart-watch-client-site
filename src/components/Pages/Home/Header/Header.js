@@ -1,8 +1,16 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import {signOut} from "firebase/auth"
+import { NavLink} from 'react-router-dom';
+import auth from '../../../../firebase.init';
 import logo from '../../../../img/logo.png'
-
+import { useAuthState } from "react-firebase-hooks/auth";
 const Header = () => {
+ 
+  const [user, loading, error] = useAuthState(auth);
+  const logout = () => {
+    signOut(auth);
+    localStorage.removeItem("accessToken");
+  };
     const menuItem = (
       <>
         <li className="font-bold m-2">
@@ -26,7 +34,7 @@ const Header = () => {
           <NavLink to="/myPortfolio">MyPortfolio</NavLink>
         </li>
 
-        {/* {user ? (
+        {user ? (
           <button onClick={logout} className="font-bold m-2">
             Sign Out
           </button>
@@ -34,7 +42,7 @@ const Header = () => {
           <li className="font-bold m-2">
             <NavLink to="/login">Login</NavLink>
           </li>
-        )} */}
+        )}
       </>
     );
     return (
