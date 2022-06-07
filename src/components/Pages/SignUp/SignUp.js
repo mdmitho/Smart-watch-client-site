@@ -6,6 +6,7 @@ import auth from '../../../firebase.init';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../../Hooks/Loading';
+import toast from 'react-hot-toast';
 const SignUp = () => {
     
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -21,7 +22,7 @@ const SignUp = () => {
   
     const navigate = useNavigate();
     const location = useLocation();
-    let from = location.state?.from?.pathname || "/dashboard";
+    let from = location.state?.from?.pathname || "/";
   
     let signInError;
   
@@ -47,6 +48,8 @@ const SignUp = () => {
       await createUserWithEmailAndPassword(data.email, data.password);
       await updateProfile({ displayName: data.name });
       console.log("update done");
+      navigate(from, { replace: true });
+        toast.success("Successfully Login!");
     };
 
     return (

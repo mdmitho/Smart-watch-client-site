@@ -6,6 +6,7 @@ import auth from '../../../firebase.init';
 import Loading from '../../../Hooks/Loading';
 import logo from '../../../img/watchLogo.png'
 import googleLogo from '../../../img/logo notfound/google logo.png'
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -39,6 +40,8 @@ const Login = () => {
 //   }
   const onSubmit = (data) => {
     // console.log(data);
+        navigate("/");
+        toast.success("Successfully Login!");
     signInWithEmailAndPassword(data.email, data.password);
   };
 

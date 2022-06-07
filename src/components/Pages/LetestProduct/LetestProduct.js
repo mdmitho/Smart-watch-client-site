@@ -1,23 +1,31 @@
 import React from 'react';
+import { useQuery } from 'react-query';
+import Loading from '../../../Hooks/Loading';
+import AllWatch from './AllWatch/AllWatch';
 
 const LetestProduct = () => {
+
+  const {
+    data: watchs,
+    isLoading,
+    refetch,
+  } = useQuery(["watch"], () =>
+    fetch("http://localhost:5000/watch").then((res) => res.json())
+  );
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+console.log(watchs);
+
     return (
-      <div>
-        <div class="card w-96 bg-base-100 shadow-xl">
-          <figure>
-            <img src="https://api.lorem.space/image/shoes?w=400&h=225" alt="Shoes" />
-          </figure>
-          <div class="card-body">
-            <h2 class="card-title">
-              Shoes!
-              <div class="badge badge-secondary">NEW</div>
-            </h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div class="card-actions justify-end">
-              <div class="badge badge-outline">Fashion</div>
-              <div class="badge badge-outline">Products</div>
-            </div>
-          </div>
+      <div className="container mx-auto">
+        <h1 className="text-center text-5xl font-bold mt-3 text-accent">Customer Reviews</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {watchs.map((watch) => (
+            <AllWatch key={watch._id} watch={watch}></AllWatch>
+          ))}
         </div>
       </div>
     );
